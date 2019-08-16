@@ -24,12 +24,38 @@ globeBind("Herb");
 
 // code example for Implicit Binding
 
+const newStuff = {
+  thing1: "phone",
+  thing2: "floor",
+  thing3: function(name) {
+    console.log(`My ${this.thing1} fell on the ${this.thing2}.`);
+    console.log(this);
+  }
+};
 
+newStuff.thing3("Bert");
 
 // Principle 3
 
 // code example for New Binding
 
+function Car(obj) {
+  this.make = obj.make;
+  this.model = obj.model;
+  this.mine = function() {
+    console.log(`This is my ${this.make} ${this.model}.`)
+  }
+}
+
+let myCar4 = new Car({make: "BMW", model: "M5"});
+let myCar5 = new Car({make: "AMC", model: "Gremlin"});
+
+myCar4.mine();
+myCar5.mine();
+
 // Principle 4
 
 // code example for Explicit Binding
+
+myCar4.mine.call(myCar5);
+myCar5.mine.apply(myCar4);
